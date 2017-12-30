@@ -2,21 +2,19 @@ package modelo;
 
 import java.util.List;
 
-public class Competencia {
+public class Competencia implements java.io.Serializable {
 
 	private String nombre;
 	private String categoria;
-	private List<Atleta> atletas;
 	
 	public Competencia() {
 		
 	}
 
-	public Competencia(String nombre, String categoria, List<Atleta> atletas) {
+	public Competencia(String nombre, String categoria) {
 		super();
 		this.nombre = nombre;
 		this.categoria = categoria;
-		this.atletas = atletas;
 	}
 
 	public String getNombre() {
@@ -35,12 +33,9 @@ public class Competencia {
 		this.categoria = categoria;
 	}
 
-	public List<Atleta> getAtletas() {
-		return atletas;
-	}
-
-	public void setAtletas(List<Atleta> atletas) {
-		this.atletas = atletas;
+	@Override
+	public String toString() {
+		return "Competencia [nombre=" + nombre + ", categoria=" + categoria + "]";
 	}
 
 }

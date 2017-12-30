@@ -1,6 +1,6 @@
 package modelo;
 
-public class Resultado {
+public class Resultado implements java.io.Serializable {
 
 	private String tInicial;
 	private String tFinal;
@@ -29,6 +29,11 @@ public class Resultado {
 
 	public void settFinal(String tFinal) {
 		this.tFinal = tFinal;
+	}
+
+	@Override
+	public String toString() {
+		return "Resultado [tInicial=" + tInicial + ", tFinal=" + tFinal + "]";
 	}
 	
 }

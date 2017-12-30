@@ -34,7 +34,11 @@ public class Ventana extends JFrame implements ActionListener {
 	public Ventana() throws IOException {
 		initComponents();
 		ga = new GestionA();
-		gd = new GestionD();
+		try {
+			gd = new GestionD();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	//	ge = new GestionE();
 		
 	}
@@ -95,7 +99,6 @@ public class Ventana extends JFrame implements ActionListener {
 
 	public void actionPerformed(ActionEvent event) {
 		String comando = event.getActionCommand();
-		System.out.println("Eventos menu " + comando);
 
 		switch (comando) {
 		case "mnuVentanaA":

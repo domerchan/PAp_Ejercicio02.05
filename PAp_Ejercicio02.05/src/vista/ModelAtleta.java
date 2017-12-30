@@ -1,5 +1,6 @@
 package vista;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.util.ArrayList;
@@ -15,7 +16,6 @@ public class ModelAtleta extends AbstractTableModel {
 	private Locale localizacion = Ventana.localizacion;
 	private ResourceBundle lang = ResourceBundle.getBundle("lang.mensajes", localizacion);
 	private List<Atleta> datos;
-	private RandomAccessFile file;
 
 	public String[] columnas = { lang.getString("Inscripcion"), lang.getString("Nombre"), lang.getString("Apellido"),
 			lang.getString("Codigo"), lang.getString("Inicial"), lang.getString("Fin"), lang.getString("Competencia"),
@@ -23,12 +23,11 @@ public class ModelAtleta extends AbstractTableModel {
 	public Class[] columnasTipos = { int.class, String.class, String.class, String.class, String.class, String.class,
 			String.class, String.class };
 
-	public ModelAtleta(RandomAccessFile file) {
+	public ModelAtleta() {
 		super();
 		datos = new ArrayList<Atleta>();
 		Locale localizacion = Ventana.localizacion;
 		lang = ResourceBundle.getBundle("lang.mensajes", localizacion);
-		this.file = file;
 	}
 
 	public ModelAtleta(List<Atleta> datos) {
@@ -59,33 +58,26 @@ public class ModelAtleta extends AbstractTableModel {
 
 		Atleta dato = (Atleta) (datos.get(row));
 
-		try {
 			switch (col) {
 			case 0:
 				return row + 1;
 			case 1:
-				return file.readUTF();
+				return dato.getNombre();
 			case 2:
-				return file.readUTF();
+				return dato.getApellido();
 			case 3:
-				file.seek((row)*81 + 36);
-				return file.readUTF();
+				return dato.getCodigo();
 			case 4:
-				return file.readUTF();
+				return dato.getResultado().gettInicial();
 			case 5:
-				return file.readUTF();
+				return dato.getResultado().gettFinal();
 			case 6:
-				return file.readUTF();
+				return dato.getCompetencia().getNombre();
 			case 7: 
-				return file.readUTF();
+				return dato.getCompetencia().getCategoria();
 			default:
 				break;
 			}
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
 		return new String();
 	}
 }
